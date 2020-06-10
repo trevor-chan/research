@@ -10,7 +10,7 @@ import os
 from numpy import asarray
 from PIL import Image
 from skimage.draw import ellipse
-from skimage.measure import label, regionprops, regionprops_table
+from skimage.measure import label, regionprops, regionprops_table, find_contours
 from skimage.transform import rotate
 
 ### Uses numpy, skimage, pillow
