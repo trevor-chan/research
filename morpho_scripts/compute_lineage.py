@@ -163,7 +163,7 @@ class network_object:
         def binarize_img(instances):
             #calculate all masks
             bounding_boxes = np.array(instances['pred_boxes'])
-            polygons = np.array(instances['pred_masks'])
+            polygons = np.array(instances['pred_masks'], dtype=object)
 
             result = np.zeros((instances['image_size'][1],instances['image_size'][0]), dtype=int)
 
@@ -412,7 +412,7 @@ def main():
         outpath = argv[2]
         out_lineage.save_object(fout = outpath)
     else:
-        out_lineage.save_object(fout = lineage_path.replace("/","_")+".lineage")
+        out_lineage.save_object(fout = lineage_path +".lineage")
     
     
     
