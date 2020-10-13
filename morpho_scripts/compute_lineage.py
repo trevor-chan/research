@@ -402,9 +402,16 @@ class lineage_timeless:
         
         
 def main(): 
-    assert len(argv) > 1, "missing data file"
+    assert len(argv) > 1, "(lineage directory) (rerun = False)"
 
     lineage_path = argv[1]
+    rerun = False
+    if len(argv) > 2:
+        rerun = True
+    
+    #if both output files exist, exit
+    if os.path.isfile(lineage_path+".lineage") and rerun == False:
+        sys.exit(lineage_path+".lineage  already exists")
     
     out_lineage = lineage_timeless(lineage_path, lineage_path, calc_fdim = True)
     
