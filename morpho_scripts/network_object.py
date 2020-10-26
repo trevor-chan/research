@@ -76,10 +76,15 @@ class network_object:
         
         self.fractal_dim = None
         
-        self.cells = []
+        self.cell_list = []
         for i in range(len(instances['pred_boxes'])):
-            cells.append(cell_object(instances['pred_boxes'][i],instances['pred_masks'][i],instances['scores'][i]))
-        
+            self.cell_list.append(cell_object(instances['pred_boxes'][i],instances['pred_masks'][i],instances['scores'][i]))
+        self.cell_areas = [cell.area for cell in self.cell_list]
+        self.cell_perimeters = [cell.perimeter for cell in self.cell_list]
+        self.cell_circularities = [cell.circularity for cell in self.cell_list]
+        self.cell_majaxes = [cell.majaxis for cell in self.cell_list]
+        self.cell_minaxes = [cell.minaxis for cell in self.cell_list]
+        self.cell_scores = [cell.score for cell in self.cell_list]
         
     def construct_centroid_list(self, instances):
         return np.array([ (((box[0]+box[2])/2).item() , ((box[1]+box[3])/2).item()) for box in instances["pred_boxes"] ])
@@ -282,8 +287,8 @@ class network_object:
             plt.savefig('out.png', bbox_inches='tight', dpi = 300)
         plt.show()
         
-    def visualize_graph(self):
-        nx.draw_networkx(self.graph, node_size = 5, node_color = 'r' , width = .5, font_size = 8, with_labels = True)
+    def visualize_graph(self, label_text = False):
+        nx.draw_networkx(self.graph, node_size = 2, node_color = 'r' , width = .5, font_size = 8, with_labels = label_text)
         
     ## Call to get fit parameters for each instance
     def fit_power(self):
