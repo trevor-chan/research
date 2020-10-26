@@ -55,7 +55,7 @@ class lineage_timeless:
                     print("load failed for "+instance_path)
                     continue
             temp_network = network_object(instances, instance_path)
-            if calf_fdim == True:
+            if calc_fdim == True:
                 temp_network.fractal_dim = temp_network.calc_fractal_dim()[0]
             result.append(temp_network)
         return result
