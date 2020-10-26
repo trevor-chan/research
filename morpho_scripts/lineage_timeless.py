@@ -40,10 +40,10 @@ from network_object import network_object
 class lineage_timeless:
     def __init__(self, filepath, tag, read = True, calc_fdim = False):
         if read == True:
-            self.items = self.read_in(filepath)
+            self.items = self.read_in(filepath, calc_fdim)
         self.tag = tag
         
-    def read_in(self, filepath):
+    def read_in(self, filepath, calc_fdim):
         result = []
         for instance_path in tqdm(sorted(glob.glob(filepath+'/**/*.data',recursive = True)), desc = filepath, position=0, leave=True):
             instances = {}
