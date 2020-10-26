@@ -54,7 +54,7 @@ class lineage_timeless:
                     #instances = torch.load(filehandle, pickle_module=pickle, map_location=torch.device('cpu'))
                     print("load failed for "+instance_path)
                     continue
-            temp_network = net.network_object(instances, instance_path)
+            temp_network = network_object(instances, instance_path)
             if calf_fdim == True:
                 temp_network.fractal_dim = temp_network.calc_fractal_dim()[0]
             result.append(temp_network)
