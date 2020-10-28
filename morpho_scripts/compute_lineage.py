@@ -56,11 +56,7 @@ def main():
     
     out_lineage = lineage_timeless(lineage_path, lineage_path, calc_fdim = True)
     
-    if len(argv) > 2:
-        outpath = argv[1]
-        out_lineage.save_object(fout = outpath)
-    else:
-        out_lineage.save_object(fout = lineage_path +".lineage")
+    out_lineage.save_object(fout = lineage_path +".lineage")
     
     
     

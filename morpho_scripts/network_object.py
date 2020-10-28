@@ -76,15 +76,15 @@ class network_object:
         
         self.fractal_dim = None
         
-        self.cell_list = []
+        cell_list = []
         for i in range(len(instances['pred_boxes'])):
             self.cell_list.append(cell_object(instances['pred_boxes'][i],instances['pred_masks'][i],instances['scores'][i]))
-        self.cell_areas = [cell.area for cell in self.cell_list]
-        self.cell_perimeters = [cell.perimeter for cell in self.cell_list]
-        self.cell_circularities = [cell.circularity for cell in self.cell_list]
-        self.cell_majaxes = [cell.majaxis for cell in self.cell_list]
-        self.cell_minaxes = [cell.minaxis for cell in self.cell_list]
-        self.cell_scores = [cell.score for cell in self.cell_list]
+        self.cell_areas = [cell.area for cell in cell_list]
+        self.cell_perimeters = [cell.perimeter for cell in cell_list]
+        self.cell_circularities = [cell.circularity for cell in cell_list]
+        self.cell_majaxes = [cell.majaxis for cell in cell_list]
+        self.cell_minaxes = [cell.minaxis for cell in cell_list]
+        self.cell_scores = [cell.score for cell in cell_list]
         
     def construct_centroid_list(self, instances):
         return np.array([ (((box[0]+box[2])/2).item() , ((box[1]+box[3])/2).item()) for box in instances["pred_boxes"] ])
