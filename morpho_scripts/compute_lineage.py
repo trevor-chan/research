@@ -58,8 +58,6 @@ def main():
     
     out_lineage.save_object(fout = lineage_path +".lineage")
     
-    
-    
 
 if __name__=="__main__": 
     main() 
