@@ -78,7 +78,7 @@ class network_object:
         
         cell_list = []
         for i in range(len(instances['pred_boxes'])):
-            self.cell_list.append(cell_object(instances['pred_boxes'][i],instances['pred_masks'][i],instances['scores'][i]))
+            cell_list.append(cell_object(instances['pred_boxes'][i],instances['pred_masks'][i],instances['scores'][i]))
         self.cell_areas = [cell.area for cell in cell_list]
         self.cell_perimeters = [cell.perimeter for cell in cell_list]
         self.cell_circularities = [cell.circularity for cell in cell_list]
