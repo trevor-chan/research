@@ -91,8 +91,8 @@ class network_object:
         self.cell_circularities = avg(ccircul)
         self.cell_circularities_var = np.var(ccircul)
         cmajax = [cell.majaxis for cell in cell_list]
-        self.cell_majaxes = avg(majax)
-        self.cell_majaxes_var = np.var(majax)
+        self.cell_majaxes = avg(cmajax)
+        self.cell_majaxes_var = np.var(cmajax)
         cminax = [cell.minaxis for cell in cell_list]
         self.cell_minaxes = avg(cminax)
         self.cell_minaxes_var = np.var(cminax)
