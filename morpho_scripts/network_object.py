@@ -48,7 +48,6 @@ scipy.special.seterr(all='raise')
 
 class network_object:
     #network object - takes in a (full) segmentation output and initializes a network-object with notable properties calculated
-    #
     
     def __init__(self, instances, tag, img = None):
         
@@ -81,12 +80,26 @@ class network_object:
             cell_list.append(cell_object(instances['pred_boxes'][i],instances['pred_masks'][i],instances['scores'][i]))
         
         def avg(x):
-            return sum(x)/len(x)  
-        self.cell_areas = avg([cell.area for cell in cell_list])
-        self.cell_perimeters = avg([cell.perimeter for cell in cell_list])
-        self.cell_circularities = avg([cell.circularity for cell in cell_list])
-        self.cell_majaxes = avg([cell.majaxis for cell in cell_list])
-        self.cell_minaxes = avg([cell.minaxis for cell in cell_list])
+            return sum(x)/len(x)
+        careas = [cell.area for cell in cell_list]
+        self.cell_areas = avg(careas)
+        self.cell_areas_var = np.var(careas)
+        cperim = [cell.perimeter for cell in cell_list]
+        self.cell_perimeters = avg(cperim)
+        self.cell_perimeters_var = np.var(cperim)
+        ccircul = [cell.circularity for cell in cell_list]
+        self.cell_circularities = avg(ccircul)
+        self.cell_circularities_var = np.var(ccircul)
+        cmajax = [cell.majaxis for cell in cell_list]
+        self.cell_majaxes = avg(majax)
+        self.cell_majaxes_var = np.var(majax)
+        cminax = [cell.minaxis for cell in cell_list]
+        self.cell_minaxes = avg(cminax)
+        self.cell_minaxes_var = np.var(cminax)
+        casra = np.divide(cmajax,cminax)
+        self.asra = avg(casra)
+        self.asra_var = np.var(casra)
+        
         self.cell_scores = avg([cell.score for cell in cell_list])
         
     def construct_centroid_list(self, instances):
