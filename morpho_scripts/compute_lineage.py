@@ -43,7 +43,7 @@ from cell_object import cell_object
         
         
 def main(): 
-    assert len(argv) > 1, "(lineage directory) (rerun = False)"
+    assert len(argv) > 1, "(lineage directory) (rerun = False) (output location and filename - '.lineage')"
 
     lineage_path = argv[1]
     rerun = False
@@ -56,7 +56,10 @@ def main():
     
     out_lineage = lineage_timeless(lineage_path, lineage_path, calc_fdim = True)
     
-    out_lineage.save_object(fout = lineage_path +".lineage")
+    if len(argv) >3:
+        out_lineage.save_object(fout = argv[3] + ".lineage")
+    else:
+        out_lineage.save_object(fout = lineage_path +".lineage")
     
 
 if __name__=="__main__": 

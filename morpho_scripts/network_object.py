@@ -264,14 +264,13 @@ class network_object:
         else:
             return fractal_dimension(Z, threshold = threshold), 0
     
-    
-    
-        
-    def calc_entropy(self):
-        print('not yet implemented')
         
     def calc_chromatic(self):
         return max(nx.coloring.greedy_color(self.graph, strategy=nx.coloring.strategy_largest_first).values())
+    
+    def calc_avg_chromatic(self):
+        temp = nx.coloring.greedy_color(self.graph, strategy=nx.coloring.strategy_largest_first).values()
+        return sum(temp)/len(temp)
     
     def get_component_masses(self):
         components_g = nx.connected_components(self.graph)
@@ -286,6 +285,36 @@ class network_object:
     def get_largest_comp_ratio(self):
         a = self.get_component_masses()
         return a[-1]/a[-2]
+    
+    
+    def shannon_entropy(self, labels):
+        """ Computes entropy of label distribution. this code from stack overflow user Jarad, 
+        https://stackoverflow.com/questions/15450192/fastest-way-to-compute-entropy-in-python"""
+        
+        n_labels = len(labels)
+        if n_labels <= 1:
+            return 0
+        value,counts = np.unique(labels, return_counts=True)
+        probs = counts / n_labels
+        n_classes = np.count_nonzero(probs)
+        if n_classes <= 1:
+            return 0
+        ent = 0.
+        # Compute entropy
+        #base = 2 #Entropy calculation default to bits
+        for i in probs:
+            ent -= i * np.log2(i)
+        return ent
+    
+    def degree_entropy(self):
+        return self.shannon_entropy([len(sublist) for sublist in self.adjacency_list])
+    
+    def compmass_entropy(self):
+        return self.shannon_entropy(self.get_component_masses())
+    
+    def colorability_entropy(self):
+        return self.shannon_entropy(list(nx.coloring.greedy_color(self.graph, strategy=nx.coloring.strategy_largest_first).values()))
+    
         
     def visualize_adjacencies(self, img = None, savefig = 0):
         fig, ax = plt.subplots()
