@@ -287,6 +287,15 @@ class network_object:
         return a[-1]/a[-2]
     
     
+    def assortativity(self):
+        try:
+            return max(0,nx.degree_pearson_correlation_coefficient(self.graph))
+        except:
+            return float("NaN")
+    
+    
+#Entropy Calculations
+    
     def shannon_entropy(self, labels):
         """ Computes entropy of label distribution. this code from stack overflow user Jarad, 
         https://stackoverflow.com/questions/15450192/fastest-way-to-compute-entropy-in-python"""
@@ -314,6 +323,10 @@ class network_object:
     
     def colorability_entropy(self):
         return self.shannon_entropy(list(nx.coloring.greedy_color(self.graph, strategy=nx.coloring.strategy_largest_first).values()))
+    
+    
+    
+#Vizualizations
     
         
     def visualize_adjacencies(self, img = None, savefig = 0):
