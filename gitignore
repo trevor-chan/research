@@ -1,4 +1,5 @@
-*.png
-*.jpeg
-*.JPG
-*.csv
+**.png
+**.jpeg
+**.JPG
+**.csv
+**.lineage
