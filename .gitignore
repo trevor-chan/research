@@ -1,7 +1,5 @@
-morpho_scripts/*.data
-morpho_scripts/*.JPG
-morpho_scripts/*.txt
-morpho_scripts/*.png
-morpho_scripts/*.out
-morpho_scripts/*.sh
-morpho_scripts/*.tsv
+**.png
+**.jpeg
+**.JPG
+**.csv
+**.lineage
